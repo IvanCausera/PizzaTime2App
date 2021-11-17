@@ -67,8 +67,8 @@ public class PaymentSummary extends BaseActivity {
             linearLayoutManager.setOrientation(linearLayoutManager.VERTICAL);
             recViewPaymentSummary.setLayoutManager(linearLayoutManager);
 
-            PedidoAdapterList pedidoAdapterList = new PedidoAdapterList(pizzasOrder, bebidasOrder);
-            recViewPaymentSummary.setAdapter(pedidoAdapterList);
+            PedidoAdapterList pizzaBebidaAdapterList = new PedidoAdapterList(pizzasOrder, bebidasOrder);
+            recViewPaymentSummary.setAdapter(pizzaBebidaAdapterList);
 
             /**
              * Start next activity.

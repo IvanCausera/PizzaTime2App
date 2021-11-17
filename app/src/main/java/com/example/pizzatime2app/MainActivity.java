@@ -1,14 +1,13 @@
 package com.example.pizzatime2app;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,9 +19,7 @@ import com.example.pizzatime2app.conexion.ApiPizzaTime;
 import com.example.pizzatime2app.conexion.ClientPizzaTime;
 import com.example.pizzatime2app.modelo.PizzaBebida;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,10 +37,10 @@ public class MainActivity extends com.example.pizzatime2app.BaseActivity {
     private double cost = 0;
     private boolean pizza = false;
     private boolean bebida = false;
-    private ArrayList<PizzaBebida> pizzasOrder = new ArrayList<>();
-    private ArrayList<PizzaBebida> bebidasOrder = new ArrayList<>();
-    private PizzaBebida pedidoPizza;
-    private PizzaBebida pedidoBebida;
+    private ArrayList<Pedido> pizzasOrder = new ArrayList<>();
+    private ArrayList<Pedido> bebidasOrder = new ArrayList<>();
+    private Pedido pedidoPizza;
+    private Pedido pedidoBebida;
     private Client client;
     private double pricePizza = 0;
     private double priceBebida = 0;
@@ -52,6 +49,9 @@ public class MainActivity extends com.example.pizzatime2app.BaseActivity {
     private ArrayList<PizzaBebida> pizzas = new ArrayList<>();
     private ArrayList<PizzaBebida> bebidas = new ArrayList<>();
     private ApiPizzaTime api;
+    private EditText editTNombre;
+    private PizzaBebidaAdapterList adapterPizza;
+    private PizzaBebidaAdapterList adapterBebida;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -68,7 +68,7 @@ public class MainActivity extends com.example.pizzatime2app.BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        EditText editTNombre = findViewById(R.id.editTNombre);
+        editTNombre = findViewById(R.id.editTNombre);
 
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra(Intent.EXTRA_TEXT)){ //From OrderSummary
@@ -114,13 +114,13 @@ public class MainActivity extends com.example.pizzatime2app.BaseActivity {
 
         recBebidas.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
 
-        PedidoAdapterList adapterPizza = new PedidoAdapterList(this);
+        adapterPizza = new PizzaBebidaAdapterList(this);
 
         adapterPizza.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pedidoPizza = pizzas.get(recPizzas.getChildAdapterPosition(view));
-                pricePizza = pedidoPizza.getPrecio();
+                pedidoPizza.setPizzaBebida(pizzas.get(recPizzas.getChildAdapterPosition(view)));
+                pricePizza = pedidoPizza.getPrice();
                 pizza = true;
                 recPizzas.setVisibility(View.GONE);
                 txtPizza.setVisibility(View.GONE);
@@ -132,8 +132,8 @@ public class MainActivity extends com.example.pizzatime2app.BaseActivity {
                 txtCantidadPizza.setVisibility(View.VISIBLE);
                 btnMasPizza.setVisibility(View.VISIBLE);
 
-                txtName.setText(pedidoPizza.getNombre());
-                txtPrice.setText(String.valueOf(pedidoPizza.getPrecio()));
+                txtName.setText(pedidoPizza.getName());
+                txtPrice.setText(String.valueOf(pricePizza));
 
                 qPizza = 1;
                 txtCantidadPizza.setText(String.valueOf(qPizza));
@@ -144,12 +144,12 @@ public class MainActivity extends com.example.pizzatime2app.BaseActivity {
             }
         });
 
-        PedidoAdapterList adapterBebida = new PedidoAdapterList(this);
+        adapterBebida = new PizzaBebidaAdapterList(this);
         adapterBebida.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pedidoBebida = bebidas.get(recBebidas.getChildAdapterPosition(view));
-                priceBebida = pedidoBebida.getPrecio();
+                pedidoBebida.setPizzaBebida(bebidas.get(recBebidas.getChildAdapterPosition(view)));
+                priceBebida = pedidoBebida.getPrice();
                 bebida = true;
                 recBebidas.setVisibility(View.GONE);
                 txtBebida.setVisibility(View.GONE);
@@ -161,8 +161,8 @@ public class MainActivity extends com.example.pizzatime2app.BaseActivity {
                 txtCantidadBebida.setVisibility(View.VISIBLE);
                 btnMasBebida.setVisibility(View.VISIBLE);
 
-                txtNameBebida.setText(pedidoBebida.getNombre());
-                txtPriceBebida.setText(String.valueOf(pedidoBebida.getPrecio()));
+                txtNameBebida.setText(pedidoBebida.getName());
+                txtPriceBebida.setText(String.valueOf(priceBebida));
 
                 qBebida = 1;
                 txtCantidadBebida.setText(String.valueOf(qBebida));
@@ -308,6 +308,8 @@ public class MainActivity extends com.example.pizzatime2app.BaseActivity {
 
         retrofit = ClientPizzaTime.getCliente();
 
+        setUserName();
+        getDatos();
 
     } // End onCreate
 
@@ -317,17 +319,43 @@ public class MainActivity extends com.example.pizzatime2app.BaseActivity {
         respuesta.enqueue(new Callback<ArrayList<PizzaBebida>>() {
             @Override
             public void onResponse(Call<ArrayList<PizzaBebida>> call, Response<ArrayList<PizzaBebida>> response) {
-                ArrayList<PizzaBebida> listPizzaBebida = response.body();
-                for (int i = 0; i < listPizzaBebida.size(); i++){
-                    PizzaBebida pb = listPizzaBebida.get(i);
-                    if (pb.getTipo() == 0) pizzas.add(pb);
-                    else bebidas.add(pb);
+                if (response.isSuccessful()){
+                    ArrayList<PizzaBebida> listPizzaBebida = response.body();
+                    for (int i = 0; i < listPizzaBebida.size(); i++){
+                        PizzaBebida pb = listPizzaBebida.get(i);
+                        if (pb.getTipo() == 0) pizzas.add(pb);
+                        else bebidas.add(pb);
+                    }
+                    adapterPizza.addToList(pizzas);
+                    adapterBebida.addToList(bebidas);
+                } else{
+                    Toast.makeText(getApplicationContext(), "Fallo en la respuesta", Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
             public void onFailure(Call<ArrayList<PizzaBebida>> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Fallo en la respuesta", Toast.LENGTH_LONG).show();
+                Log.e("FAIL", t.getMessage());
+            }
+        });
+    }
 
+    private void setUserName(){
+        api = retrofit.create(ApiPizzaTime.class);
+        Call<String> respuesta = api.getNombre();
+        respuesta.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful()){
+                    editTNombre.setText(response.body());
+                    editTNombre.setEnabled(false); //TODO funciona bien??
+                } else
+                    Toast.makeText(getApplicationContext(), "Fallo en la respuesta", Toast.LENGTH_LONG).show();
+            }
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Fallo en la respuesta", Toast.LENGTH_LONG).show();
+                Log.e("FAIL", t.getMessage());
             }
         });
     }

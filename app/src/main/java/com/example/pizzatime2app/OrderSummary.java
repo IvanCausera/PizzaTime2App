@@ -56,16 +56,16 @@ public class OrderSummary extends BaseActivity {
             linearLayoutManager.setOrientation(linearLayoutManager.VERTICAL);
             recViewSummary.setLayoutManager(linearLayoutManager);
 
-            PedidoAdapterList pedidoAdapterList = new PedidoAdapterList(pizzasOrder, bebidasOrder);
-            recViewSummary.setAdapter(pedidoAdapterList);
-            pedidoAdapterList.setOnClickListener(new View.OnClickListener() {
+            PedidoAdapterList pizzaBebidaAdapterList = new PedidoAdapterList(pizzasOrder, bebidasOrder);
+            recViewSummary.setAdapter(pizzaBebidaAdapterList);
+            pizzaBebidaAdapterList.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     int position = recViewSummary.getChildAdapterPosition(view);
                     Pedido pizza = pizzasOrder.get(position);
                     Pedido bebida = bebidasOrder.get(position);
 
-                    pedidoAdapterList.removeItem(position);
+                    pizzaBebidaAdapterList.removeItem(position);
 
                     double reduceCost = (pizza.getQuantity() * pizza.getPrice());
                     if (bebida != null) reduceCost += (bebida.getQuantity() * bebida.getPrice());

@@ -3,6 +3,8 @@ package com.example.pizzatime2app;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.example.pizzatime2app.modelo.PizzaBebida;
+
 public class Pedido implements Parcelable {
     private String name;
     private Double price;
@@ -71,5 +73,10 @@ public class Pedido implements Parcelable {
         }
         parcel.writeInt(quantity);
         parcel.writeString(image);
+    }
+
+    public void setPizzaBebida(PizzaBebida pb){
+        name = pb.getNombre();
+        price = pb.getPrecio();
     }
 }

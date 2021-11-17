@@ -1,6 +1,5 @@
 package com.example.pizzatime2app;
 
-import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,20 +10,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.pizzatime2app.modelo.PizzaBebida;
-
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class PedidoAdapterList extends RecyclerView.Adapter<PedidoAdapterList.ListViewHolder> {
 
-    private Context context;
-    public ArrayList<PizzaBebida> list;
+    public ArrayList<Pedido> listPizzas;
+    public ArrayList<Pedido> listBebidas = null;
     public View.OnClickListener onClickListener;
 
-    public PedidoAdapterList(Context context){
-        this.context =  context;
-        list = new ArrayList<>();
+    public PedidoAdapterList(ArrayList<Pedido> list) {
+        this.listPizzas = list;
+    }
+    public PedidoAdapterList(ArrayList<Pedido> listPizzas, ArrayList<Pedido> listBebidas) {
+        this.listPizzas = listPizzas; this.listBebidas=listBebidas;
     }
 
 
@@ -39,55 +38,47 @@ public class PedidoAdapterList extends RecyclerView.Adapter<PedidoAdapterList.Li
 
     @Override
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
-        PizzaBebida pedidoPizza = list.get(position);
-        holder.name.setText(pedidoPizza.getNombre());
-        holder.price.setText(String.valueOf(pedidoPizza.getPrecio()));
+        Pedido pedidoPizza = listPizzas.get(position);
+        holder.name.setText(pedidoPizza.getName());
+        holder.price.setText(pedidoPizza.getQuantity() + " -- " + pedidoPizza.getPrice());
+
+        if (listBebidas.get(position) != null){
+            Pedido pedidoBebida = listBebidas.get(position);
+            holder.nameBebida.setVisibility(View.VISIBLE);
+            holder.nameBebida.setText(pedidoBebida.getName());
+            holder.priceBebida.setVisibility(View.VISIBLE);
+            holder.priceBebida.setText(pedidoBebida.getQuantity() + " -- " + pedidoBebida.getPrice());
+        }
     }
     @Override
     public int getItemCount() {
-        if (list == null)
-            return 0;
-        else return list.size();
+        if (listPizzas == null) return 0;
+        else return listPizzas.size();
+    }
+
+    public void removeItem(int position){
+        listPizzas.remove(position);
+        listBebidas.remove(position);
+        notifyDataSetChanged();
     }
 
     public void setOnClickListener(View.OnClickListener onClickListener) {
         this.onClickListener = onClickListener;
-    }
-    public void changeList(ArrayList<PizzaBebida> list){
-        this.list = null;
-        this.list = new ArrayList<>();
-        this.list.addAll(list);
-        notifyDataSetChanged();
-    }
-
-    public void addToList(ArrayList<PizzaBebida> list){
-        this.list.addAll(list);
-        notifyDataSetChanged();
-    }
-
-    public void addToList(PizzaBebida pizzaBebida){
-        this.list.add(pizzaBebida);
-        notifyDataSetChanged();
-    }
-
-    public void updateItem(int pos, PizzaBebida pizzaBebida){
-        this.list.set(pos, pizzaBebida);
-        notifyItemChanged(pos);
-    }
-
-    public void deleteItem(int pos){
-        this.list.remove(pos);
-        notifyDataSetChanged();
     }
 
     class ListViewHolder extends RecyclerView.ViewHolder{
         public TextView name;
         public TextView price;
 
+        public TextView nameBebida;
+        public TextView priceBebida;
+
         public ListViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.txtName_listE);
-            price = itemView.findViewById(R.id.txtName_listE);
+            price = itemView.findViewById(R.id.txtPrice_listE);
+            nameBebida = itemView.findViewById(R.id.txtBebidaName_listE);
+            priceBebida = itemView.findViewById(R.id.txtBebidaPrice_listE);
         }
     }
 }

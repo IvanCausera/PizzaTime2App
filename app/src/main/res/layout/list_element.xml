@@ -19,9 +19,28 @@
     <TextView
         android:id="@+id/txtPrice_listE"
         style="@style/txtLable"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="asdfasdfsafd"
         app:layout_constraintStart_toStartOf="@+id/txtName_listE"
         app:layout_constraintTop_toBottomOf="@+id/txtName_listE" />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/txtBebidaName_listE"
+        style="@style/txtLable"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="asdfasdfsafd"
+        app:layout_constraintStart_toStartOf="@+id/txtPrice_listE"
+        app:layout_constraintTop_toBottomOf="@+id/txtPrice_listE" />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/txtBebidaPrice_listE"
+        style="@style/txtLable"
+        android:layout_marginTop="8dp"
+        android:text="asdfasdfsafd"
+        app:layout_constraintStart_toStartOf="@+id/txtBebidaName_listE"
+        app:layout_constraintTop_toBottomOf="@+id/txtBebidaName_listE" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
