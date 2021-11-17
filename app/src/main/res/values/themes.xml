@@ -1,0 +1,43 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.PizzaTime2App" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/burgundy_light</item>
+        <item name="colorPrimaryVariant">@color/burgundy_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/orange_dark</item>
+        <item name="colorSecondaryVariant">@color/orange_light</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="txtLable">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="imagePizza">
+        <item name="android:layout_width">130dp</item>
+        <item name="android:layout_height">65dp</item>
+    </style>
+    <style name="bigImagePizza">
+        <item name="android:layout_width">300dp</item>
+        <item name="android:layout_height">160dp</item>
+    </style>
+    <style name="mediumImagePizza">
+        <item name="android:layout_width">180dp</item>
+        <item name="android:layout_height">140dp</item>
+    </style>
+
+    <style name="textPizza">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+</resources>

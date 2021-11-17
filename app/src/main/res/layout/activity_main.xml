@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/editTNombre"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:inputType="text"
+            android:hint="@string/nombre_apellido"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+        <TextView
+            android:id="@+id/txtPizza"
+            style="@style/textPizza"
+            android:layout_marginTop="16dp"
+            android:text="@string/elige_una_pizza"
+            app:layout_constraintStart_toStartOf="@+id/editTNombre"
+            app:layout_constraintTop_toBottomOf="@+id/editTNombre" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recViewPizzas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/editTNombre"
+            app:layout_constraintStart_toStartOf="@+id/editTNombre"
+            app:layout_constraintTop_toBottomOf="@+id/txtPizza" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/txtNameListE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/editTNombre"
+            app:layout_constraintHorizontal_bias="0.3"
+            app:layout_constraintStart_toStartOf="@+id/editTNombre"
+            app:layout_constraintTop_toBottomOf="@+id/recViewPizzas" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/txtPriceListE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/txtNameListE"
+            app:layout_constraintTop_toTopOf="@+id/txtNameListE" />
+
+        <Button
+            android:visibility="gone"
+            android:id="@+id/btnCancelPizza"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:text="@string/cancelar"
+            app:layout_constraintEnd_toStartOf="@+id/btnMenosPizza"
+            app:layout_constraintTop_toTopOf="@+id/btnMenosPizza"/>
+
+        <Button
+            android:visibility="gone"
+            android:id="@+id/btnMenosPizza"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="-"
+            app:layout_constraintEnd_toStartOf="@+id/btnMasPizza"
+            app:layout_constraintStart_toStartOf="@+id/txtNameListE"
+            app:layout_constraintTop_toBottomOf="@+id/txtNameListE" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/txtCantidadPizza"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/btnMasPizza"
+            app:layout_constraintEnd_toStartOf="@+id/btnMenosPizza"
+            app:layout_constraintStart_toEndOf="@+id/btnMasPizza"
+            app:layout_constraintTop_toTopOf="@+id/btnMasPizza" />
+
+        <Button
+            android:visibility="gone"
+            android:id="@+id/btnMasPizza"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="+"
+            app:layout_constraintEnd_toEndOf="@+id/editTNombre"
+            app:layout_constraintTop_toTopOf="@+id/btnMenosPizza" />
+
+        <TextView
+            android:id="@+id/txtBebida"
+            style="@style/textPizza"
+            android:layout_marginTop="32dp"
+            android:text="@string/elige_bebida"
+            app:layout_constraintStart_toStartOf="@+id/txtPizza"
+            app:layout_constraintTop_toBottomOf="@+id/btnMenosPizza" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recViewBebidas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/editTNombre"
+            app:layout_constraintStart_toStartOf="@+id/editTNombre"
+            app:layout_constraintTop_toBottomOf="@+id/txtBebida" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/txtNameBebidaListE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/editTNombre"
+            app:layout_constraintHorizontal_bias="0.3"
+            app:layout_constraintStart_toStartOf="@+id/editTNombre"
+            app:layout_constraintTop_toBottomOf="@+id/recViewBebidas" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/txtPriceBebidaListE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/txtNameBebidaListE"
+            app:layout_constraintTop_toTopOf="@+id/txtNameBebidaListE" />
+
+        <Button
+            android:visibility="gone"
+            android:id="@+id/btnCancelBebida"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:text="@string/cancelar"
+            app:layout_constraintEnd_toStartOf="@+id/btnMenosBebida"
+            app:layout_constraintTop_toTopOf="@+id/btnMenosBebida"/>
+
+        <Button
+            android:visibility="gone"
+            android:id="@+id/btnMenosBebida"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="-"
+            app:layout_constraintEnd_toStartOf="@+id/btnMasBebida"
+            app:layout_constraintStart_toStartOf="@+id/txtNameBebidaListE"
+            app:layout_constraintTop_toBottomOf="@+id/txtNameBebidaListE" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/txtCantidadBebida"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/btnMasBebida"
+            app:layout_constraintEnd_toStartOf="@+id/btnMenosBebida"
+            app:layout_constraintStart_toEndOf="@+id/btnMasBebida"
+            app:layout_constraintTop_toTopOf="@+id/btnMasBebida" />
+
+        <Button
+            android:visibility="gone"
+            android:id="@+id/btnMasBebida"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="+"
+            app:layout_constraintEnd_toEndOf="@+id/editTNombre"
+            app:layout_constraintTop_toTopOf="@+id/btnMenosBebida" />
+
+        <TextView
+            android:id="@+id/txtCoste_ActMain"
+            style="@style/textPizza"
+            android:layout_marginTop="16dp"
+            android:text="Coste: 0"
+            app:layout_constraintEnd_toEndOf="@+id/btnAceept_ActMain"
+            app:layout_constraintStart_toStartOf="@+id/btnAceept_ActMain"
+            app:layout_constraintTop_toBottomOf="@+id/btnMasBebida"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/btnAceept_ActMain"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:text="@string/anadir_a_la_cesta"
+            app:layout_constraintEnd_toEndOf="@+id/editTNombre"
+            app:layout_constraintStart_toStartOf="@+id/editTNombre"
+            app:layout_constraintTop_toBottomOf="@+id/txtCoste_ActMain" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

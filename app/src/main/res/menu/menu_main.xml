@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/menuWikiPizza"
+        android:title="@string/historia_pizza"
+        android:icon="@drawable/history_pizza"
+        app:showAsAction="always"/>
+    <item android:id="@+id/menuVersion"
+        android:title="@string/version_aplicacion"
+        />
+    <item android:id="@+id/menuAuthor"
+        android:title="@string/autor"
+        />
+</menu>

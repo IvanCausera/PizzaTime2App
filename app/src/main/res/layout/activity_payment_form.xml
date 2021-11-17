@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PaymentForm">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:src="@drawable/logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/txtNombre"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center_horizontal"
+            android:text="@string/nombre"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+        <TextView
+            android:id="@+id/txtCardType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/tipo_de_tarjeta"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/txtNombre"
+            app:layout_constraintTop_toBottomOf="@+id/txtNombre" />
+
+        <ImageView
+            android:id="@+id/imageCard"
+            style="@style/imagePizza"
+            android:src="@drawable/visa_logo"
+            app:layout_constraintStart_toStartOf="@+id/txtCardType"
+            app:layout_constraintTop_toBottomOf="@+id/txtCardType"/>
+
+        <Spinner
+            android:id="@+id/spinnerCard"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageCard"
+            app:layout_constraintEnd_toEndOf="@+id/txtNombre"
+            app:layout_constraintStart_toEndOf="@+id/imageCard"
+            app:layout_constraintTop_toBottomOf="@+id/txtCardType" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:text="@string/numero_de_tarjeta"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/imageCard"
+            app:layout_constraintTop_toBottomOf="@+id/imageCard" />
+
+        <EditText
+            android:id="@+id/editTCardNum"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:maxLength="16"
+            android:inputType="number"
+            android:autofillHints="creditCardNumber"
+            app:layout_constraintStart_toStartOf="@+id/textView4"
+            app:layout_constraintTop_toBottomOf="@+id/textView4"/>
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:text="@string/fecha_caducidad"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/editTCardNum"
+            app:layout_constraintTop_toBottomOf="@+id/editTCardNum" />
+
+
+        <EditText
+            android:id="@+id/editTMonth"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:autofillHints="creditCardExpirationMonth"
+            android:hint="12"
+            android:inputType="number"
+            android:maxLength="2"
+            app:layout_constraintStart_toStartOf="@+id/textView5"
+            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+        <EditText
+            android:id="@+id/editTYear"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:layout_marginStart="32dp"
+            android:autofillHints="creditCardExpirationYear"
+            android:hint="2021"
+            android:maxLength="4"
+            android:inputType="number"
+            app:layout_constraintStart_toEndOf="@+id/editTMonth"
+            app:layout_constraintTop_toTopOf="@+id/editTMonth" />
+
+        <TextView
+            android:id="@+id/txtCoste_ActPaymentForm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/coste"
+            android:textSize="26sp"
+            app:layout_constraintEnd_toEndOf="@+id/btnAccept_ActPaymentForm"
+            app:layout_constraintHorizontal_bias="0.75"
+            app:layout_constraintStart_toStartOf="@+id/btnAccept_ActPaymentForm"
+            app:layout_constraintTop_toBottomOf="@+id/editTYear" />
+
+        <Button
+            android:id="@+id/btnAccept_ActPaymentForm"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/pagar"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtCoste_ActPaymentForm"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

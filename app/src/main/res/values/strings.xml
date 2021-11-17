@@ -1,0 +1,49 @@
+<resources>
+    <string name="app_name" translatable="false">PizzaTimeApp</string>
+    <string name="name_author" translatable="false">Iván Causera</string>
+    <string name="nombre">Nombre</string>
+    <string name="nombre_apellido">Nombre Apellido</string>
+    <string name="elige_una_pizza">Elige una pizza</string>
+    <string name="romana">Romana</string>
+    <string name="barbacoa">Barbacoa</string>
+    <string name="margarita">Margarita</string>
+    <string name="elige_bebida">Elige bebida</string>
+    <string name="realizar_compra">Realizar compra</string>
+    <string name="agua">Agua</string>
+    <string name="refresco">Refresco</string>
+    <string name="coste">Coste</string>
+    <string name="resumen_pedido">Resumen Pedido</string>
+    <string name="porciones_de_pizza">Porciones de pizza de</string>
+    <string name="botellas_de">Botellas de </string>
+    <string name="pagar">Pagar</string>
+    <string name="tipo_de_tarjeta">Tipo de tarjeta</string>
+    <string name="numero_de_tarjeta">Número de tarjeta</string>
+    <string name="fecha_caducidad">Fecha caducidad</string>
+    <string name="resumen_del_pago">Resumen del pago</string>
+    <string name="tarjeta">Tarjeta</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="enviar">Enviar</string>
+    <string name="historia_pizza">Historia Pizza</string>
+    <string name="version_aplicacion">Versión Aplicación</string>
+    <string name="autor">Autor</string>
+    <string name="version">Versión</string>
+    <string name="pago_realizado">Pago realizado</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="anadir_a_la_cesta">Añadir a la cesta</string>
+    <string name="comprar_mas">Comprar Más</string>
+    <string name="carbonara">Carbonara</string>
+
+    <string name="error_establecer_nombre">Es necesario establecer un nombre</string>selectionar una pizza
+    <string name="error_selecionar_pizza">Es necesario selecionar una pizza</string>
+    <string name="error_sin_num_card">Es necesario establecer el número de tarjeta</string>
+    <string name="error_sin_fecha_caducidad">Es necesario establecer la fecha de caducidad</string>
+    <string name="error_fecha_incorrecta">El formato de la fecha es incorrecto</string>
+    <string name="error_card_caducada">La tarjeta ha caducado</string>
+    <string name="error_necesario_un_pedido">Es necesario al menos un pedio</string>
+
+    <string-array name="tarjetas">
+        <item>VISA</item>
+        <item>MasterCard</item>
+        <item>EURO 6000</item>
+    </string-array>
+</resources>

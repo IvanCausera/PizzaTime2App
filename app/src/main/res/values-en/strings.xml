@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="nombre">Name</string>
+    <string name="nombre_apellido">Frist mame Last name</string>
+    <string name="elige_una_pizza">Choose a pizza</string>
+    <string name="romana">Roman</string>
+    <string name="barbacoa">Barbecue</string>
+    <string name="margarita">Margarita</string>
+    <string name="elige_bebida">Choose drink</string>
+    <string name="realizar_compra">Make purchase</string>
+    <string name="agua">Water</string>
+    <string name="refresco">Soda</string>
+    <string name="coste">Cost</string>
+    <string name="resumen_pedido">Order Summary</string>
+    <string name="porciones_de_pizza">Pizza slices of</string>
+    <string name="botellas_de">"Bottles of "</string>
+    <string name="cancelar">Cancel</string>
+    <string name="pagar">Pay</string>
+    <string name="tipo_de_tarjeta">Card type</string>
+    <string name="numero_de_tarjeta">Card number</string>
+    <string name="fecha_caducidad">Expiration date</string>
+    <string name="error_sin_num_card">It is necessary to establish the card number</string>
+    <string name="error_sin_fecha_caducidad">It is necessary to establish the expiration date</string>
+    <string name="error_fecha_incorrecta">Date format is incorrect</string>
+    <string name="error_card_caducada">Card has expired</string>
+    <string name="resumen_del_pago">Payment summary</string>
+    <string name="tarjeta">Card</string>
+    <string name="aceptar">Accept</string>
+    <string name="enviar">Send</string>
+    <string name="historia_pizza">Pizza History</string>
+    <string name="version_aplicacion">Application Version</string>
+    <string name="autor">Author</string>
+    <string name="version">Version</string>
+    <string name="pago_realizado">Payment made</string>
+    <string name="error_establecer_nombre">It is necessary to establish a name</string>
+    <string name="error_selecionar_pizza">It is necessary to select a pizza</string>
+    <string name="error_necesario_un_pedido">At least one order is required</string>
+    <string name="comprar_mas">Buy More</string>
+    <string name="anadir_a_la_cesta">Add to cart</string>
+    <string name="carbonara">Carbonara</string>
+</resources>
