@@ -48,6 +48,12 @@ public interface ApiPizzaTime {
             @Body PizzaBebida pizzaBebida
     );
 
+    @PUT("pedidosUsuario/{id}")
+    Call<PedidosUsuario> putPedidosUsuario(
+            @Path("id") int id,
+            @Body PedidosUsuario pedidosUsuario
+    );
+
     @DELETE("pizzaBebida/{id}")
     Call<PizzaBebida> deletePizzaBebida(@Path("id") int id);
 }

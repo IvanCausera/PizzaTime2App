@@ -33,8 +33,10 @@
     <string name="comprar_mas">Comprar Más</string>
     <string name="carbonara">Carbonara</string>
     <string name="hola">Hola</string>
+    <string name="historial">Historial</string>
 
-    <string name="error_establecer_nombre">Es necesario establecer un nombre</string>selectionar una pizza
+    <string name="error_establecer_nombre">Es necesario establecer un nombre</string>selectionar una
+    pizza
     <string name="error_selecionar_pizza">Es necesario selecionar una pizza</string>
     <string name="error_sin_num_card">Es necesario establecer el número de tarjeta</string>
     <string name="error_sin_fecha_caducidad">Es necesario establecer la fecha de caducidad</string>

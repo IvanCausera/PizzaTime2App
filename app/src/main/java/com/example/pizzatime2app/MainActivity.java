@@ -1,6 +1,7 @@
 package com.example.pizzatime2app;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -31,6 +32,7 @@ public class MainActivity extends com.example.pizzatime2app.BaseActivity {
     static protected final String CLIENT = "Client";
     static protected final String PIZZA = "Pizza";
     static protected final String BEBIDA = "Bebida";
+    static protected final String HISTORY = "history";
 
     private int qPizza = 0;
     private int qBebida = 0;
@@ -56,11 +58,25 @@ public class MainActivity extends com.example.pizzatime2app.BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        return super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuItem menuItem = menu.findItem(R.id.menuHistory);
+        menuItem.setVisible(true);
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.menuHistory){
+
+            Bundle bundle = new Bundle();
+            bundle.putParcelable(HISTORY, pedidosUsuario);
+
+            Intent intentHistory = new Intent(this, HistoryActivity.class);
+
+            intentHistory.putExtra(Intent.EXTRA_TEXT, bundle);
+
+            startActivity(intentHistory);
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -355,6 +371,7 @@ public class MainActivity extends com.example.pizzatime2app.BaseActivity {
                 if (response.isSuccessful()){
                     pedidosUsuario = response.body();
                     txtNombre.setText(getString(R.string.hola) + " " + pedidosUsuario.getNombre());
+
                 } else{
                     Toast.makeText(getApplicationContext(), "Fallo en la respuesta", Toast.LENGTH_SHORT).show();
                 }
