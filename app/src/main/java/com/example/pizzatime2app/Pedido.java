@@ -11,6 +11,8 @@ public class Pedido implements Parcelable {
     private int quantity;
     private String image;
 
+    public Pedido() { super();}
+
     public Pedido(String name, Double price, String image) {
         this.name = name;
         this.price = price;

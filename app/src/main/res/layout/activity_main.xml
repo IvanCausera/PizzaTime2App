@@ -19,13 +19,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/editTNombre"
+        <TextView
+            android:id="@+id/txtNombre_main"
             android:layout_width="330dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:inputType="text"
-            android:hint="@string/nombre_apellido"
+            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -35,15 +35,15 @@
             style="@style/textPizza"
             android:layout_marginTop="16dp"
             android:text="@string/elige_una_pizza"
-            app:layout_constraintStart_toStartOf="@+id/editTNombre"
-            app:layout_constraintTop_toBottomOf="@+id/editTNombre" />
+            app:layout_constraintStart_toStartOf="@+id/txtNombre_main"
+            app:layout_constraintTop_toBottomOf="@+id/txtNombre_main" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recViewPizzas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@+id/editTNombre"
-            app:layout_constraintStart_toStartOf="@+id/editTNombre"
+            app:layout_constraintEnd_toEndOf="@+id/txtNombre_main"
+            app:layout_constraintStart_toStartOf="@+id/txtNombre_main"
             app:layout_constraintTop_toBottomOf="@+id/txtPizza" />
 
         <TextView
@@ -54,9 +54,9 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTNombre"
+            app:layout_constraintEnd_toEndOf="@+id/txtNombre_main"
             app:layout_constraintHorizontal_bias="0.3"
-            app:layout_constraintStart_toStartOf="@+id/editTNombre"
+            app:layout_constraintStart_toStartOf="@+id/txtNombre_main"
             app:layout_constraintTop_toBottomOf="@+id/recViewPizzas" />
 
         <TextView
@@ -108,7 +108,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:text="+"
-            app:layout_constraintEnd_toEndOf="@+id/editTNombre"
+            app:layout_constraintEnd_toEndOf="@+id/txtNombre_main"
             app:layout_constraintTop_toTopOf="@+id/btnMenosPizza" />
 
         <TextView
@@ -124,8 +124,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/editTNombre"
-            app:layout_constraintStart_toStartOf="@+id/editTNombre"
+            app:layout_constraintEnd_toEndOf="@+id/txtNombre_main"
+            app:layout_constraintStart_toStartOf="@+id/txtNombre_main"
             app:layout_constraintTop_toBottomOf="@+id/txtBebida" />
 
         <TextView
@@ -136,9 +136,9 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTNombre"
+            app:layout_constraintEnd_toEndOf="@+id/txtNombre_main"
             app:layout_constraintHorizontal_bias="0.3"
-            app:layout_constraintStart_toStartOf="@+id/editTNombre"
+            app:layout_constraintStart_toStartOf="@+id/txtNombre_main"
             app:layout_constraintTop_toBottomOf="@+id/recViewBebidas" />
 
         <TextView
@@ -190,7 +190,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:text="+"
-            app:layout_constraintEnd_toEndOf="@+id/editTNombre"
+            app:layout_constraintEnd_toEndOf="@+id/txtNombre_main"
             app:layout_constraintTop_toTopOf="@+id/btnMenosBebida" />
 
         <TextView
@@ -208,8 +208,8 @@
             android:layout_width="330dp"
             android:layout_height="wrap_content"
             android:text="@string/anadir_a_la_cesta"
-            app:layout_constraintEnd_toEndOf="@+id/editTNombre"
-            app:layout_constraintStart_toStartOf="@+id/editTNombre"
+            app:layout_constraintEnd_toEndOf="@+id/txtNombre_main"
+            app:layout_constraintStart_toStartOf="@+id/txtNombre_main"
             app:layout_constraintTop_toBottomOf="@+id/txtCoste_ActMain" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

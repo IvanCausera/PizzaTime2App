@@ -2,7 +2,10 @@ package com.example.pizzatime2app.conexion;
 
 import com.example.pizzatime2app.modelo.PedidoItem;
 import com.example.pizzatime2app.modelo.PedidosRealizados;
+import com.example.pizzatime2app.modelo.PedidosUsuario;
 import com.example.pizzatime2app.modelo.PizzaBebida;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
@@ -20,11 +23,8 @@ public interface ApiPizzaTime {
     @GET("pizzaBebida")
     Call<ArrayList<PizzaBebida>> getPizzaBebida();
 
-    @GET("pedidosUsuario/nombre")
-    Call<String> getNombre();
-
-    @GET("pedidosUsuario/pedidosRealizados")
-    Call<String> getPedidosRealizados();
+    @GET("pedidosUsuario")
+    Call<PedidosUsuario> getPedidosUsuario();
 
     @FormUrlEncoded
     @POST("pizzaBebida")

@@ -7,16 +7,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pizzatime2app.conexion.ApiPizzaTime;
 import com.example.pizzatime2app.conexion.ClientPizzaTime;
+import com.example.pizzatime2app.modelo.PedidosUsuario;
 import com.example.pizzatime2app.modelo.PizzaBebida;
 
 import java.util.ArrayList;
@@ -39,8 +39,8 @@ public class MainActivity extends com.example.pizzatime2app.BaseActivity {
     private boolean bebida = false;
     private ArrayList<Pedido> pizzasOrder = new ArrayList<>();
     private ArrayList<Pedido> bebidasOrder = new ArrayList<>();
-    private Pedido pedidoPizza;
-    private Pedido pedidoBebida;
+    private Pedido pedidoPizza = new Pedido();
+    private Pedido pedidoBebida = new Pedido();
     private Client client;
     private double pricePizza = 0;
     private double priceBebida = 0;
@@ -49,9 +49,10 @@ public class MainActivity extends com.example.pizzatime2app.BaseActivity {
     private ArrayList<PizzaBebida> pizzas = new ArrayList<>();
     private ArrayList<PizzaBebida> bebidas = new ArrayList<>();
     private ApiPizzaTime api;
-    private EditText editTNombre;
+    private TextView txtNombre;
     private PizzaBebidaAdapterList adapterPizza;
     private PizzaBebidaAdapterList adapterBebida;
+    private PedidosUsuario pedidosUsuario;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -68,7 +69,7 @@ public class MainActivity extends com.example.pizzatime2app.BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        editTNombre = findViewById(R.id.editTNombre);
+        txtNombre = findViewById(R.id.txtNombre_main);
 
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra(Intent.EXTRA_TEXT)){ //From OrderSummary
@@ -76,7 +77,7 @@ public class MainActivity extends com.example.pizzatime2app.BaseActivity {
             client = bundle.getParcelable(MainActivity.CLIENT);
             pizzasOrder = bundle.getParcelableArrayList(MainActivity.PIZZA);
             bebidasOrder = bundle.getParcelableArrayList(MainActivity.BEBIDA);
-            editTNombre.setText(client.getName());
+            txtNombre.setText(client.getName());
         }
         if (intent != null && intent.hasExtra(Intent.EXTRA_SUBJECT)){//From PaymentSummary
             Toast.makeText(MainActivity.this, intent.getStringExtra(Intent.EXTRA_SUBJECT), Toast.LENGTH_SHORT).show();
@@ -110,9 +111,14 @@ public class MainActivity extends com.example.pizzatime2app.BaseActivity {
         recBebidas.setHasFixedSize(true);
 
 
-        recPizzas.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
+        LinearLayoutManager linearLayoutRecPizzas = new LinearLayoutManager(MainActivity.this);
+        linearLayoutRecPizzas.setOrientation(linearLayoutRecPizzas.VERTICAL);
+        recPizzas.setLayoutManager(linearLayoutRecPizzas);
 
-        recBebidas.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
+
+        LinearLayoutManager linearLayoutRecBebidas = new LinearLayoutManager(MainActivity.this);
+        linearLayoutRecBebidas.setOrientation(linearLayoutRecBebidas.VERTICAL);
+        recBebidas.setLayoutManager(linearLayoutRecBebidas);
 
         adapterPizza = new PizzaBebidaAdapterList(this);
 
@@ -270,12 +276,12 @@ public class MainActivity extends com.example.pizzatime2app.BaseActivity {
         btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = editTNombre.getText().toString();
+                String name = txtNombre.getText().toString();
                 boolean error = false;
 
                 if (name.isEmpty()){
                     error = true;
-                    editTNombre.setError(getString(R.string.error_establecer_nombre));
+                    txtNombre.setError(getString(R.string.error_establecer_nombre));
                 }
                 if (qPizza == 0){
                     error = true;
@@ -308,7 +314,7 @@ public class MainActivity extends com.example.pizzatime2app.BaseActivity {
 
         retrofit = ClientPizzaTime.getCliente();
 
-        setUserName();
+        getPedidosUsuario();
         getDatos();
 
     } // End onCreate
@@ -340,20 +346,21 @@ public class MainActivity extends com.example.pizzatime2app.BaseActivity {
         });
     }
 
-    private void setUserName(){
+    private void getPedidosUsuario(){
         api = retrofit.create(ApiPizzaTime.class);
-        Call<String> respuesta = api.getNombre();
-        respuesta.enqueue(new Callback<String>() {
+        Call<PedidosUsuario> respuesta = api.getPedidosUsuario();
+        respuesta.enqueue(new Callback<PedidosUsuario>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<PedidosUsuario> call, Response<PedidosUsuario> response) {
                 if (response.isSuccessful()){
-                    editTNombre.setText(response.body());
-                    editTNombre.setEnabled(false); //TODO funciona bien??
-                } else
-                    Toast.makeText(getApplicationContext(), "Fallo en la respuesta", Toast.LENGTH_LONG).show();
+                    pedidosUsuario = response.body();
+                    txtNombre.setText(getString(R.string.hola) + " " + pedidosUsuario.getNombre());
+                } else{
+                    Toast.makeText(getApplicationContext(), "Fallo en la respuesta", Toast.LENGTH_SHORT).show();
+                }
             }
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<PedidosUsuario> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "Fallo en la respuesta", Toast.LENGTH_LONG).show();
                 Log.e("FAIL", t.getMessage());
             }

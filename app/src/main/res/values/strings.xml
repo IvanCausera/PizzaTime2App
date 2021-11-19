@@ -32,6 +32,7 @@
     <string name="anadir_a_la_cesta">Añadir a la cesta</string>
     <string name="comprar_mas">Comprar Más</string>
     <string name="carbonara">Carbonara</string>
+    <string name="hola">Hola</string>
 
     <string name="error_establecer_nombre">Es necesario establecer un nombre</string>selectionar una pizza
     <string name="error_selecionar_pizza">Es necesario selecionar una pizza</string>

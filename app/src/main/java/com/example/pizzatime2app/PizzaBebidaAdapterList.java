@@ -1,6 +1,7 @@
 package com.example.pizzatime2app;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ public class PizzaBebidaAdapterList extends RecyclerView.Adapter<PizzaBebidaAdap
     @Override
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
         PizzaBebida pedidoPizza = list.get(position);
+
         holder.name.setText(pedidoPizza.getNombre());
         holder.price.setText(String.valueOf(pedidoPizza.getPrecio()));
     }
@@ -84,7 +86,7 @@ public class PizzaBebidaAdapterList extends RecyclerView.Adapter<PizzaBebidaAdap
         public ListViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.txtName_listE);
-            price = itemView.findViewById(R.id.txtName_listE);
+            price = itemView.findViewById(R.id.txtPrice_listE);
         }
     }
 }
