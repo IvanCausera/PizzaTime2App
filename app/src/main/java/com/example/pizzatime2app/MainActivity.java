@@ -316,6 +316,8 @@ public class MainActivity extends com.example.pizzatime2app.BaseActivity {
                     if (client != null) clientCost = client.getCost();
 
                     client = new Client(name, (clientCost + cost));
+
+                    client.setPedidoUsuario(pedidosUsuario);
                     Bundle bundle = new Bundle();
                     bundle.putParcelable(CLIENT, client);
                     bundle.putParcelableArrayList(PIZZA, pizzasOrder);
@@ -357,7 +359,7 @@ public class MainActivity extends com.example.pizzatime2app.BaseActivity {
             @Override
             public void onFailure(Call<ArrayList<PizzaBebida>> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "Fallo en la respuesta", Toast.LENGTH_LONG).show();
-                Log.e("FAIL", t.getMessage());
+                Log.e("MainPizzaBebida", t.getMessage());
             }
         });
     }
@@ -379,7 +381,7 @@ public class MainActivity extends com.example.pizzatime2app.BaseActivity {
             @Override
             public void onFailure(Call<PedidosUsuario> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "Fallo en la respuesta", Toast.LENGTH_LONG).show();
-                Log.e("FAIL", t.getMessage());
+                Log.e("MainPedidosUsuario", t.getMessage());
             }
         });
     }

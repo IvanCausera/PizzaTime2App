@@ -26,34 +26,14 @@ public interface ApiPizzaTime {
     @GET("pedidosUsuario")
     Call<PedidosUsuario> getPedidosUsuario();
 
-    @FormUrlEncoded
-    @POST("pizzaBebida")
-    Call<PizzaBebida> postPizzaBebida(
-            @Field("nombre") String nombre,
-            @Field("precio") double precio,
-            @Field("tipo") int tipo
-    );
-
-    @FormUrlEncoded
-    @POST("pedidosUsuario/pedidosRealizados")
-    Call<PedidosRealizados> postPedidosRealizados(
-            @Field("pizzas") ArrayList<PedidoItem> pizzas,
-            @Field("bebida") ArrayList<PedidoItem> bebidas,
-            @Field("precioTotal") double precioTotal
-    );
-
     @PUT("pizzaBebida/{id}")
     Call<PizzaBebida> putPizzaBebida(
             @Path("id") int id,
             @Body PizzaBebida pizzaBebida
     );
 
-    @PUT("pedidosUsuario/{id}")
+    @PUT("pedidosUsuario")
     Call<PedidosUsuario> putPedidosUsuario(
-            @Path("id") int id,
             @Body PedidosUsuario pedidosUsuario
     );
-
-    @DELETE("pizzaBebida/{id}")
-    Call<PizzaBebida> deletePizzaBebida(@Path("id") int id);
 }

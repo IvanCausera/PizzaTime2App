@@ -3,6 +3,8 @@ package com.example.pizzatime2app;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.example.pizzatime2app.modelo.PedidosUsuario;
+
 import java.util.Calendar;
 
 public class Client implements Parcelable {
@@ -13,19 +15,37 @@ public class Client implements Parcelable {
     private String card;
     private String expirationDate;
 
+    private PedidosUsuario pedidoUsuario;
+
     public Client(String name, double cost) {
         this.name = name;
         this.cost = Math.round(cost * 100) / 100.0;
     }
 
+
     protected Client(Parcel in) {
-        this.name = in.readString();
-        this.cost = in.readDouble();
-        this.cardType = in.readString();
-        this.card = in.readString();
-        this.expirationDate = in.readString();
+        name = in.readString();
+        cost = in.readDouble();
+        cardType = in.readString();
+        card = in.readString();
+        expirationDate = in.readString();
+        pedidoUsuario = in.readParcelable(PedidosUsuario.class.getClassLoader());
     }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeDouble(cost);
+        dest.writeString(cardType);
+        dest.writeString(card);
+        dest.writeString(expirationDate);
+        dest.writeParcelable(pedidoUsuario, flags);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
     public static final Creator<Client> CREATOR = new Creator<Client>() {
         @Override
@@ -39,21 +59,6 @@ public class Client implements Parcelable {
         }
     };
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(name);
-        parcel.writeDouble(cost);
-
-        parcel.writeString(cardType);
-        parcel.writeString(card);
-        parcel.writeString(expirationDate);
-    }
-
     /**
      * Check between two calendar if one is expired.
      * @param calActual calendar with the actual date
@@ -61,7 +66,7 @@ public class Client implements Parcelable {
      * @return true if is expired
      */
     public static boolean isExpired(Calendar calExpirationDate, Calendar calActual){
-        return calActual.compareTo(calExpirationDate) == 1;
+        return calActual.compareTo(calExpirationDate) > 0;
     }
 
     /**
@@ -127,5 +132,13 @@ public class Client implements Parcelable {
 
     public void setCost(double cost) {
         this.cost = Math.round(cost * 100) / 100.0;
+    }
+
+    public PedidosUsuario getPedidoUsuario() {
+        return pedidoUsuario;
+    }
+
+    public void setPedidoUsuario(PedidosUsuario pedidoUsuario) {
+        this.pedidoUsuario = pedidoUsuario;
     }
 }

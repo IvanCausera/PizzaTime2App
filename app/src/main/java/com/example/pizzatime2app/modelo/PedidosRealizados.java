@@ -3,6 +3,7 @@ package com.example.pizzatime2app.modelo;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
@@ -32,17 +33,25 @@ public class PedidosRealizados implements Parcelable {
         super();
     }
 
+    public PedidosRealizados(int id, ArrayList<PedidoItem> pizzas, ArrayList<PedidoItem> bebidas, double precioTotal) {
+        this.id = id;
+        this.pizzas = pizzas;
+        this.bebidas = bebidas;
+        this.precioTotal = precioTotal;
+    }
+
     protected PedidosRealizados(Parcel in) {
         id = in.readInt();
+        pizzas = in.createTypedArrayList(PedidoItem.CREATOR);
+        bebidas = in.createTypedArrayList(PedidoItem.CREATOR);
         precioTotal = in.readDouble();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.Q)
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
-        dest.writeParcelableList(pizzas, flags);
-        dest.writeParcelableList(bebidas, flags);
+        dest.writeTypedList(pizzas);
+        dest.writeTypedList(bebidas);
         dest.writeDouble(precioTotal);
     }
 

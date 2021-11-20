@@ -9,19 +9,33 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pizzatime2app.conexion.ApiPizzaTime;
+import com.example.pizzatime2app.conexion.ClientPizzaTime;
+import com.example.pizzatime2app.modelo.PedidoItem;
+import com.example.pizzatime2app.modelo.PedidosRealizados;
+import com.example.pizzatime2app.modelo.PedidosUsuario;
+
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class PaymentSummary extends BaseActivity {
     static protected final String ACCEPT = "Accept";
     private ArrayList<Pedido> pizzasOrder;
     private ArrayList<Pedido> bebidasOrder;
     private Client client;
+
+    private Retrofit retrofit;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -77,6 +91,7 @@ public class PaymentSummary extends BaseActivity {
             btnAccept.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    insertarPedidoUsuario(client.getPedidoUsuario());
                     Intent intentPaymentSummary = new Intent(PaymentSummary.this, MainActivity.class);
                     intentPaymentSummary.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.pago_realizado));
                     startActivity(intentPaymentSummary);
@@ -89,6 +104,7 @@ public class PaymentSummary extends BaseActivity {
             btnEnviar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    insertarPedidoUsuario(client.getPedidoUsuario());
                     String message = txtNombre.getText().toString() + "\n" +
                             txtCard.getText().toString() + "\n" +
                             txtCoste.getText().toString() + "\n";
@@ -107,5 +123,50 @@ public class PaymentSummary extends BaseActivity {
             });
 
         }
+
+        retrofit = ClientPizzaTime.getCliente();
+
+    } // End onCreate
+
+    private void insertarPedidoUsuario(PedidosUsuario pu){
+        ApiPizzaTime api = retrofit.create(ApiPizzaTime.class);
+
+        ArrayList<PedidoItem> pizzas = new ArrayList<>();
+        for (Pedido pedido:
+             pizzasOrder) {
+            pizzas.add(pedido.toPedidoItem());
+        }
+
+        ArrayList<PedidoItem> bebidas = new ArrayList<>();
+        for (Pedido bebida:
+                bebidasOrder) {
+            if (bebida != null) bebidas.add(bebida.toPedidoItem());
+        }
+
+        int lastid = -1;
+        ArrayList<PedidosRealizados> pedidosRealizados = pu.getPedidoRealizado();
+        if (!pedidosRealizados.isEmpty())
+            lastid = pedidosRealizados.get(pedidosRealizados.size() - 1).getId();
+
+
+        pu.addPedido(new PedidosRealizados((lastid+1), pizzas, bebidas, client.getCost()));
+
+        Call<PedidosUsuario> callPedido = api.putPedidosUsuario(pu);
+
+        callPedido.enqueue(new Callback<PedidosUsuario>() {
+            @Override
+            public void onResponse(Call<PedidosUsuario> call, Response<PedidosUsuario> response) {
+                if (!response.isSuccessful()){
+
+                    Toast.makeText(getApplicationContext(), (response.code() + ": " + response.message()), Toast.LENGTH_LONG).show();
+                    Log.e("CallPayment", response.code() + ": " + response.message());
+                }
+            }
+            @Override
+            public void onFailure(Call<PedidosUsuario> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Fallo en la respuesta", Toast.LENGTH_LONG).show();
+                Log.e("CallPayment", t.getMessage());
+            }
+        });
     }
 }

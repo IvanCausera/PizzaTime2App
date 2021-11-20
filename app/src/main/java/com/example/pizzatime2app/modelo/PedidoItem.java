@@ -19,6 +19,11 @@ public class PedidoItem implements Parcelable {
         super();
     }
 
+    public PedidoItem(String nombre, int cantidad) {
+        this.nombre = nombre;
+        this.cantidad = cantidad;
+    }
+
     protected PedidoItem(Parcel in) {
         nombre = in.readString();
         cantidad = in.readInt();

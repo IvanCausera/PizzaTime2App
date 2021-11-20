@@ -38,4 +38,8 @@
     <string name="comprar_mas">Buy More</string>
     <string name="anadir_a_la_cesta">Add to cart</string>
     <string name="carbonara">Carbonara</string>
+    <string name="hola">Hello</string>
+    <string name="historial">History</string>
+    <string name="precio_total">Total Price</string>
+    <string name="pedido">Order</string>
 </resources>

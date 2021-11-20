@@ -26,14 +26,13 @@ public class HistoryActivity extends AppCompatActivity {
         }
 
         RecyclerView recHistory = findViewById(R.id.recViewHistory);
-        Log.i("EEEEEEEEE", pedidosUsuario.getPizzas().size() + "");
         recHistory.setHasFixedSize(true);
 
         LinearLayoutManager linearLayoutRecPizzas = new LinearLayoutManager(HistoryActivity.this);
         linearLayoutRecPizzas.setOrientation(linearLayoutRecPizzas.VERTICAL);
         recHistory.setLayoutManager(linearLayoutRecPizzas);
 
-        PedidosRealizadosAdapterList adapterPizza = new PedidosRealizadosAdapterList(pedidosUsuario.getPizzas());
+        PedidosRealizadosAdapterList adapterPizza = new PedidosRealizadosAdapterList(pedidosUsuario.getPedidoRealizado(), this);
 
         recHistory.setAdapter(adapterPizza);
 

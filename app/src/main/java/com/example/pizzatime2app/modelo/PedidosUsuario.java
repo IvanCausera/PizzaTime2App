@@ -3,6 +3,7 @@ package com.example.pizzatime2app.modelo;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
@@ -22,18 +23,31 @@ public class PedidosUsuario implements Parcelable {
 
     @SerializedName("pedidosRealizados")
     @Expose
-    private ArrayList<PedidosRealizados> pizzas;
+    private ArrayList<PedidosRealizados> pedidoRealizado;
 
     public PedidosUsuario() {super();}
 
-    public PedidosUsuario(String nombre, ArrayList<PedidosRealizados> pizzas) {
+    public PedidosUsuario(String nombre, ArrayList<PedidosRealizados> pedidoRealizado) {
         this.nombre = nombre;
-        this.pizzas = pizzas;
+        this.pedidoRealizado = pedidoRealizado;
     }
 
     protected PedidosUsuario(Parcel in) {
         id = in.readInt();
         nombre = in.readString();
+        pedidoRealizado = in.createTypedArrayList(PedidosRealizados.CREATOR);
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(nombre);
+        dest.writeTypedList(pedidoRealizado);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<PedidosUsuario> CREATOR = new Creator<PedidosUsuario>() {
@@ -56,8 +70,8 @@ public class PedidosUsuario implements Parcelable {
         return nombre;
     }
 
-    public ArrayList<PedidosRealizados> getPizzas() {
-        return pizzas;
+    public ArrayList<PedidosRealizados> getPedidoRealizado() {
+        return pedidoRealizado;
     }
 
     public void setId(int id) {
@@ -68,20 +82,7 @@ public class PedidosUsuario implements Parcelable {
         this.nombre = nombre;
     }
 
-    public void setPizzas(ArrayList<PedidosRealizados> pizzas) {
-        this.pizzas = pizzas;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.Q)
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(id);
-        parcel.writeString(nombre);
-        parcel.writeParcelableList(pizzas, i);
+    public void addPedido(PedidosRealizados pedidoRealizados){
+        this.pedidoRealizado.add(pedidoRealizados);
     }
 }

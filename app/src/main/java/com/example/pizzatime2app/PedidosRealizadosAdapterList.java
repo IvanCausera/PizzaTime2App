@@ -1,5 +1,6 @@
 package com.example.pizzatime2app;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,10 +22,12 @@ public class PedidosRealizadosAdapterList extends RecyclerView.Adapter<PedidosRe
     private Context context;
     public ArrayList<PedidosRealizados> list;
 
-    public PedidosRealizadosAdapterList(ArrayList<PedidosRealizados> list){
-        this.list = list;
-    }
+    public PedidosRealizadosAdapterList(ArrayList<PedidosRealizados> list){ this.list = list; }
 
+    public PedidosRealizadosAdapterList(ArrayList<PedidosRealizados> list, Context context){
+        this.list = list;
+        this.context = context;
+    }
 
     @NonNull
     @Override
@@ -37,15 +40,23 @@ public class PedidosRealizadosAdapterList extends RecyclerView.Adapter<PedidosRe
     @Override
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
         PedidosRealizados pedidoRealizado = list.get(position);
-
-        holder.id.setText(String.valueOf(pedidoRealizado.getId()));
+        String textPizza = "";
+        String textBebida = "";
+        holder.id.setText( context.getString(R.string.pedido) + ": " +  (pedidoRealizado.getId()+1));
         for (PedidoItem item: pedidoRealizado.getPizzas()) {
-            holder.pizzas.setText(item.getNombre() + " " + item.getCantidad() + "\n");
+            textPizza += item.getNombre() + ", " + item.getCantidad() + "\n";
         }
-        for (PedidoItem item: pedidoRealizado.getBebidas()) {
-            holder.bebidas.setText(item.getNombre() + " " + item.getCantidad() + "\n");
+
+        if (!pedidoRealizado.getBebidas().isEmpty()){
+            holder.bebidas.setVisibility(View.VISIBLE);
+            for (PedidoItem item: pedidoRealizado.getBebidas()) {
+                textBebida += item.getNombre() + ", " + item.getCantidad() + "\n";
+            }
         }
-        holder.precioTotal.setText(String.valueOf(pedidoRealizado.getPrecioTotal()));
+
+        holder.pizzas.setText(textPizza);
+        holder.bebidas.setText(textBebida);
+        holder.precioTotal.setText(context.getString(R.string.precio_total) + ": " +  pedidoRealizado.getPrecioTotal());
 
     }
     @Override

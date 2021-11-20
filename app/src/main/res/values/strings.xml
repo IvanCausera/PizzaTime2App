@@ -34,6 +34,8 @@
     <string name="carbonara">Carbonara</string>
     <string name="hola">Hola</string>
     <string name="historial">Historial</string>
+    <string name="precio_total">Precio Total</string>
+    <string name="pedido">Pedido</string>
 
     <string name="error_establecer_nombre">Es necesario establecer un nombre</string>selectionar una
     pizza

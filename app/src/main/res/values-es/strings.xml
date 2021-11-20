@@ -38,4 +38,8 @@
     <string name="comprar_mas">Comprar Más</string>
     <string name="error_necesario_un_pedido">Es necesario al menos un pedio</string>
     <string name="carbonara">Carbonara</string>
+    <string name="hola">Hola</string>
+    <string name="historial">Historial</string>
+    <string name="precio_total">Precio Total</string>
+    <string name="pedido">Pedido</string>
 </resources>
